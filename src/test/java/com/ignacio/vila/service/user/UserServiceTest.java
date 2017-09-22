@@ -1,14 +1,13 @@
 package com.ignacio.vila.service.user;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import com.ignacio.vila.model.user.User;
+import com.ignacio.vila.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import com.ignacio.vila.model.user.User;
-import com.ignacio.vila.repository.UserRepository;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class UserServiceTest {
 	private UserService userService;

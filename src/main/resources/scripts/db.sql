@@ -1,3 +1,3 @@
--- requieres MySQL installed in computer
+-- requires MySQL installed in computer
 create schema registry;
-use schema registry;
+use registry;

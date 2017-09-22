@@ -1,12 +1,11 @@
 package com.ignacio.vila.service.user;
 
-import java.util.List;
-
+import com.ignacio.vila.model.user.User;
+import com.ignacio.vila.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ignacio.vila.model.user.User;
-import com.ignacio.vila.repository.UserRepository;
+import java.util.List;
 
 @Service
 public class UserService {

@@ -1,8 +1,7 @@
 package com.ignacio.vila.service.currency;
 
-import org.springframework.stereotype.Service;
-
 import com.ignacio.vila.model.currency.Currency;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CurrencyService {
