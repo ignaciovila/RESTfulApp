@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import moment from 'moment';
 
 class Card extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {price: null};
+        this.state = {
+            price: "0.000",
+        };
     }
 
     componentDidMount() {
@@ -20,10 +23,11 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="card">
+            <div className="card bg-light mb-3">
                 <div className="card-block">
-                    <h4 className="card-title titulo">{this.props.currency}</h4>
-                    <p className="card-text texto">{this.state.price}</p>
+                    <div class="card-header">Price</div>
+                    <h4 className="card-title titulo">{this.state.price}</h4>
+                    <p className="card-text">{moment().fromNow()}</p>
                 </div>
             </div>
         );
@@ -34,14 +38,17 @@ class CardContainer extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col-md-2">
+                <div id="dolares" className="col-md-2">
+                    <h5 className="titulo">DOLAR</h5>
                     <Card currency={'Dolar'}/>
                 </div>
-                <div className="col-md-2">
+                <div id="euros" className="col-md-2">
+                    <h5 className="titulo">EURO</h5>
                     <Card currency={'Euro'}/>
                 </div>
-                <div className="col-md-2">
-                    <Card currency={'Pesos'}/>
+                <div id="reales" className="col-md-2">
+                    <h5 className="titulo">REAL</h5>
+                    <Card currency={'Real'}/>
                 </div>
             </div>
         );

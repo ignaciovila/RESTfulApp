@@ -22,9 +22,9 @@ public class CurrencyController {
 		return currencyService.getCurrentValue(new EuroStrategy());
 	}
 
-	@RequestMapping("/Cotizacion/Pesos")
+	@RequestMapping("/Cotizacion/Real")
 	public Currency getPesos() throws CurrencyException {
-		return currencyService.getCurrentValue(new PesosStrategy());
+		return currencyService.getCurrentValue(new RealStrategy());
 	}
 
 }
