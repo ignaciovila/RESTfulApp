@@ -45,9 +45,8 @@ class CardsContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.setPrice().bind(this);
         setInterval(
-            this.setPrice.bind(this), 60000
+            this.setPrice.bind(this), 10000
         );
     }
 

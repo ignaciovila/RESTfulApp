@@ -26066,8 +26066,7 @@ var CardsContainer = function (_React$Component2) {
     _createClass(CardsContainer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.setPrice().bind(this);
-            setInterval(this.setPrice.bind(this), 60000);
+            setInterval(this.setPrice.bind(this), 10000);
         }
     }, {
         key: 'setPrice',
