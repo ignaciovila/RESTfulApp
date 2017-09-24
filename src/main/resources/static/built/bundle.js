@@ -26001,10 +26001,28 @@ var Card = function (_React$Component) {
     function Card() {
         _classCallCheck(this, Card);
 
-        return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this));
+
+        _this.state = {
+            secondsElapsed: 0
+        };
+        return _this;
     }
 
     _createClass(Card, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            setInterval(this.tick.bind(this), 1000);
+        }
+    }, {
+        key: 'tick',
+        value: function tick() {
+            var prevState = this.state;
+            this.setState({
+                secondsElapsed: prevState.secondsElapsed + 1
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -26021,7 +26039,7 @@ var Card = function (_React$Component) {
                     _react2.default.createElement(
                         'p',
                         { className: 'card-text texto' },
-                        (0, _moment2.default)().fromNow()
+                        (0, _moment2.default)().subtract(this.state.secondsElapsed, 'seconds').fromNow()
                     )
                 )
             );
@@ -26040,7 +26058,7 @@ var CardsContainer = function (_React$Component2) {
         var _this2 = _possibleConstructorReturn(this, (CardsContainer.__proto__ || Object.getPrototypeOf(CardsContainer)).call(this));
 
         _this2.state = {
-            cards: ["0.000"]
+            cards: []
         };
         return _this2;
     }
@@ -26048,10 +26066,19 @@ var CardsContainer = function (_React$Component2) {
     _createClass(CardsContainer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            this.setPrice().bind(this);
+            setInterval(this.setPrice.bind(this), 60000);
+        }
+    }, {
+        key: 'setPrice',
+        value: function setPrice() {
             var _this3 = this;
 
             _axios2.default.get('/Cotizacion/' + this.props.currency).then(function (response) {
-                _this3.setState({ cards: [response.data.buyPrice] });
+                var prevState = _this3.state;
+                _this3.setState({
+                    cards: prevState.cards.concat([response.data.buyPrice])
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -26059,8 +26086,10 @@ var CardsContainer = function (_React$Component2) {
     }, {
         key: 'getCards',
         value: function getCards() {
+            var _this4 = this;
+
             return this.state.cards.map(function (card) {
-                return _react2.default.createElement(Card, { price: card });
+                return _react2.default.createElement(Card, { price: card, time: _this4.state.secondsElapsed });
             });
         }
     }, {
