@@ -4,58 +4,65 @@ import axios from 'axios';
 import moment from 'moment';
 
 class Card extends React.Component {
-    constructor(props) {
-        super(props);
+    render() {
+        return (
+            <div className="card bg-light mb-3 carta">
+                <div className="card-block">
+                    <div className="card-header titulo">{this.props.price}</div>
+                    <p className="card-text texto">{moment().fromNow()}</p>
+                </div>
+            </div>
+        );
+    }
+}
+
+class CardsContainer extends React.Component {
+    constructor() {
+        super();
         this.state = {
-            price: "0.000",
+            cards: ["0.000"],
         };
     }
 
     componentDidMount() {
         axios.get('/Cotizacion/' + this.props.currency)
             .then((response) => {
-                this.setState({price: response.data.buyPrice});
+                this.setState(
+                    {cards: [response.data.buyPrice]});
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
+    getCards() {
+        return this.state.cards.map(card => <Card price={card}/>);
+    }
+
     render() {
         return (
-            <div className="card bg-light mb-3">
-                <div className="card-block">
-                    <div class="card-header">Price</div>
-                    <h4 className="card-title titulo">{this.state.price}</h4>
-                    <p className="card-text">{moment().fromNow()}</p>
-                </div>
+            <div className="col-md-2">
+                <h5 className="titulo">{this.props.currency}</h5>
+                {this.getCards()}
             </div>
         );
     }
 }
 
-class CardContainer extends React.Component {
+class CurrencyBoard extends React.Component {
     render() {
         return (
             <div className="row">
-                <div id="dolares" className="col-md-2">
-                    <h5 className="titulo">DOLAR</h5>
-                    <Card currency={'Dolar'}/>
-                </div>
-                <div id="euros" className="col-md-2">
-                    <h5 className="titulo">EURO</h5>
-                    <Card currency={'Euro'}/>
-                </div>
-                <div id="reales" className="col-md-2">
-                    <h5 className="titulo">REAL</h5>
-                    <Card currency={'Real'}/>
-                </div>
+                <CardsContainer currency="Dolar"/>
+                <CardsContainer currency="Euro"/>
+                <CardsContainer currency="Real"/>
             </div>
         );
     }
 }
 
+const app = document.getElementById('root');
 ReactDOM.render(
-    <CardContainer/>,
-    document.getElementById('root')
-);
+    <CurrencyBoard/>, app
+)
+;

@@ -5,6 +5,15 @@
 
 .titulo {
     text-align: center;
+    font-weight: bold;
+}
+
+.texto {
+    text-align: center;
+}
+
+.carta {
+    max-width: 20rem;
 }
 
 .h5 {

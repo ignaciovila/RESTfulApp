@@ -25998,50 +25998,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Card = function (_React$Component) {
     _inherits(Card, _React$Component);
 
-    function Card(props) {
+    function Card() {
         _classCallCheck(this, Card);
 
-        var _this = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
-
-        _this.state = {
-            price: "0.000"
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
     }
 
     _createClass(Card, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            _axios2.default.get('/Cotizacion/' + this.props.currency).then(function (response) {
-                _this2.setState({ price: response.data.buyPrice });
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'card bg-light mb-3' },
+                { className: 'card bg-light mb-3 carta' },
                 _react2.default.createElement(
                     'div',
                     { className: 'card-block' },
                     _react2.default.createElement(
                         'div',
-                        { 'class': 'card-header' },
-                        'Cotizacion'
-                    ),
-                    _react2.default.createElement(
-                        'h4',
-                        { className: 'card-title titulo' },
-                        this.state.price
+                        { className: 'card-header titulo' },
+                        this.props.price
                     ),
                     _react2.default.createElement(
                         'p',
-                        { className: 'card-text' },
+                        { className: 'card-text texto' },
                         (0, _moment2.default)().fromNow()
                     )
                 )
@@ -26052,59 +26031,84 @@ var Card = function (_React$Component) {
     return Card;
 }(_react2.default.Component);
 
-var CardContainer = function (_React$Component2) {
-    _inherits(CardContainer, _React$Component2);
+var CardsContainer = function (_React$Component2) {
+    _inherits(CardsContainer, _React$Component2);
 
-    function CardContainer() {
-        _classCallCheck(this, CardContainer);
+    function CardsContainer() {
+        _classCallCheck(this, CardsContainer);
 
-        return _possibleConstructorReturn(this, (CardContainer.__proto__ || Object.getPrototypeOf(CardContainer)).apply(this, arguments));
+        var _this2 = _possibleConstructorReturn(this, (CardsContainer.__proto__ || Object.getPrototypeOf(CardsContainer)).call(this));
+
+        _this2.state = {
+            cards: ["0.000"]
+        };
+        return _this2;
     }
 
-    _createClass(CardContainer, [{
+    _createClass(CardsContainer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this3 = this;
+
+            _axios2.default.get('/Cotizacion/' + this.props.currency).then(function (response) {
+                _this3.setState({ cards: [response.data.buyPrice] });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'getCards',
+        value: function getCards() {
+            return this.state.cards.map(function (card) {
+                return _react2.default.createElement(Card, { price: card });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'col-md-2' },
+                _react2.default.createElement(
+                    'h5',
+                    { className: 'titulo' },
+                    this.props.currency
+                ),
+                this.getCards()
+            );
+        }
+    }]);
+
+    return CardsContainer;
+}(_react2.default.Component);
+
+var CurrencyBoard = function (_React$Component3) {
+    _inherits(CurrencyBoard, _React$Component3);
+
+    function CurrencyBoard() {
+        _classCallCheck(this, CurrencyBoard);
+
+        return _possibleConstructorReturn(this, (CurrencyBoard.__proto__ || Object.getPrototypeOf(CurrencyBoard)).apply(this, arguments));
+    }
+
+    _createClass(CurrencyBoard, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 { className: 'row' },
-                _react2.default.createElement(
-                    'div',
-                    { id: 'dolares', className: 'col-md-2' },
-                    _react2.default.createElement(
-                        'h5',
-                        { className: 'titulo' },
-                        'DOLAR'
-                    ),
-                    _react2.default.createElement(Card, { currency: 'Dolar' })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { id: 'euros', className: 'col-md-2' },
-                    _react2.default.createElement(
-                        'h5',
-                        { className: 'titulo' },
-                        'EURO'
-                    ),
-                    _react2.default.createElement(Card, { currency: 'Euro' })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { id: 'reales', className: 'col-md-2' },
-                    _react2.default.createElement(
-                        'h5',
-                        { className: 'titulo' },
-                        'REAL'
-                    ),
-                    _react2.default.createElement(Card, { currency: 'Real' })
-                )
+                _react2.default.createElement(CardsContainer, { currency: 'Dolar' }),
+                _react2.default.createElement(CardsContainer, { currency: 'Euro' }),
+                _react2.default.createElement(CardsContainer, { currency: 'Real' })
             );
         }
     }]);
 
-    return CardContainer;
+    return CurrencyBoard;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(CardContainer, null), document.getElementById('root'));
+var app = document.getElementById('root');
+_reactDom2.default.render(_react2.default.createElement(CurrencyBoard, null), app);
 
 /***/ }),
 /* 205 */
