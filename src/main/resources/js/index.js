@@ -65,7 +65,7 @@ class CardsContainer extends React.Component {
     }
 
     getCards() {
-        return this.state.cards.map(card => <Card price={card} time={this.state.secondsElapsed}/>);
+        return this.state.cards.map(card => <Card price={card}/>);
     }
 
     render() {
