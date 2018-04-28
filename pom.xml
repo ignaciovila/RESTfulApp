@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ignacio.vila</groupId>
     <artifactId>MyRestfulApp</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -69,13 +69,13 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install node and yarn</id>
+                        <id>install node and npm</id>
                         <goals>
-                            <goal>install-node-and-yarn</goal>
+                            <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v8.4.0</nodeVersion>
-                            <yarnVersion>v1.0.2</yarnVersion>
+                            <nodeVersion>v10.0.0</nodeVersion>
+                            <npmVersion>6.0.0</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
