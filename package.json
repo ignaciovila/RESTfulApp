@@ -3,18 +3,16 @@
   "version": "0.0.1",
   "description": "API REST",
   "main": "index.js",
-  "repository": "https://github.com/ignaciovila/RESTfulApp.git",
-  "author": "Ignacio Vila <ivila@dc.uba.ar>",
+  "author": "Ignacio Vila",
   "license": "UBA",
+  "repository": "https://github.com/ignaciovila/RESTfulApp.git",
   "private": false,
   "dependencies": {
     "ajv": "^6.4.0",
     "axios": "^0.16.2",
     "moment": "^2.18.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
-  },
-  "devDependencies": {
+    "react-dom": "^15.6.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.24.1",
